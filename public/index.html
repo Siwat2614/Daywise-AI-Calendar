@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Daywise ปฏิทินและผู้ช่วยวางแผนด้วย AI"><title>Daywise — วางแผนวันของคุณ</title>
+  <link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Daywise หน้าหลัก"><span class="brand-icon" aria-hidden="true">✳</span><span>daywise<span class="brand-period">.</span><small>MAKE TIME FOR WHAT MATTERS</small></span></a>
+    <div class="side-label">พื้นที่ของคุณ</div>
+    <div class="side-current"><span aria-hidden="true">▦</span> ปฏิทินของฉัน <span class="side-arrow">↗</span></div>
+    
+    <div class="side-note"><span class="side-note-icon" aria-hidden="true">✦</span><strong>ให้วันของคุณ<br>เบาลงอีกนิด</strong><p>พิมพ์ พูด หรือแนบภาพ<br>แล้วให้ AI ช่วยร่างแผน</p></div>
+    <div class="sidebar-bottom"><span class="status-dot"></span><span id="side-status">ข้อมูลเก็บในเบราว์เซอร์นี้</span></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><p class="eyebrow"><span class="eyebrow-dot"></span> A LITTLE SPACE FOR YOUR BIG PLANS</p><h1>จัดวันให้ลงตัว<span class="heading-sparkle">✳</span></h1><p class="subhead">พื้นที่เล็ก ๆ สำหรับทุกแผนสำคัญของคุณ</p></div><button class="connect" id="add-event" type="button"><span aria-hidden="true">＋</span> เพิ่มกิจกรรม</button></header>
+    <section class="account-panel"><div><strong>บัญชี Daywise</strong><p id="account-status" role="status">กำลังตรวจสอบการตั้งค่าการซิงก์...</p></div><form id="account-form" hidden><label>อีเมล<input id="account-email" type="email" autocomplete="email" required></label><label>รหัสผ่าน<input id="account-password" type="password" autocomplete="current-password" minlength="8" required></label><div class="account-actions"><button type="submit">เข้าสู่ระบบ</button><button type="button" id="account-signup">สมัครสมาชิก</button></div></form><div class="account-actions"><button type="button" id="account-refresh" hidden>รีเฟรชข้อมูล</button><button type="button" id="account-import" hidden>นำข้อมูลเครื่องนี้ขึ้นบัญชี</button><button type="button" id="account-logout" hidden>ออกจากระบบ</button></div></section><div class="notice" id="notice" role="status">กิจกรรมเก็บในเบราว์เซอร์นี้เท่านั้น ยังไม่ซิงก์หรือแจ้งเตือน และอาจหายหากล้างข้อมูลเบราว์เซอร์</div>
+    <section class="next-up" aria-label="กิจกรรมถัดไป"><div class="next-icon" aria-hidden="true">✦</div><div class="next-copy"><span class="kicker">UP NEXT · กิจกรรมถัดไป</span><strong id="next-title">กำลังเตรียมปฏิทินของคุณ</strong><span id="next-time"></span></div><button type="button" id="next-open" class="next-open" hidden>ดูในปฏิทิน ↗</button></section>
+    <div class="layout">
+      <section class="calendar panel" aria-label="ปฏิทินรายเดือน">
+        <div class="panel-heading"><div><div class="section-tag"><span class="section-icon" aria-hidden="true">▦</span> ปฏิทินของฉัน</div><h2 id="month-label">ปฏิทิน</h2><p>เลือกวันที่เพื่อดูกิจกรรมของคุณ</p></div><div class="calendar-controls"><button id="today" class="text-button" type="button">วันนี้</button><button id="prev" class="icon-button" type="button" aria-label="เดือนก่อนหน้า">‹</button><button id="next" class="icon-button" type="button" aria-label="เดือนถัดไป">›</button></div></div>
+        <div class="view-switch" role="group" aria-label="รูปแบบปฏิทิน"><button type="button" data-view="month" aria-pressed="true">เดือน</button><button type="button" data-view="week" aria-pressed="false">สัปดาห์</button><button type="button" data-view="day" aria-pressed="false">วัน</button></div><div id="month-view"><div class="weekdays" aria-hidden="true"><span>อา.</span><span>จ.</span><span>อ.</span><span>พ.</span><span>พฤ.</span><span>ศ.</span><span>ส.</span></div><div id="calendar-grid" class="calendar-grid" aria-label="วันที่ในเดือน"></div></div><div id="week-view" class="week-view" hidden></div>
+        <div class="day-section"><div class="day-head"><div><span class="kicker">YOUR SELECTED DAY</span><h3 id="day-label">กิจกรรมวันนี้</h3></div><span id="day-count" class="count">0 กิจกรรม</span></div><div id="day-events" class="day-events"></div></div>
+      </section>
+      <section class="assistant panel" aria-label="ผู้ช่วยวางแผน AI">
+        <div class="assistant-heading"><div class="assistant-icon" aria-hidden="true">✳</div><div><span class="assistant-overline">YOUR PLANNING COMPANION</span><h2>ผู้ช่วยวางแผน</h2></div><span class="ai-label"><span></span> GEMINI AI</span></div>
+        <div class="assistant-body">
+          <div class="assistant-welcome"><div class="welcome-decoration" aria-hidden="true">✷</div><span class="welcome-eyebrow">LET'S MAKE A PLAN</span><h3>วันนี้มีแผนอะไรบ้าง?</h3><p>พิมพ์ พูด หรือแนบภาพมาได้เลย<br>AI จะช่วยเตรียมร่างให้คุณตรวจสอบ</p><div class="welcome-orbit orbit-one" aria-hidden="true"></div><div class="welcome-orbit orbit-two" aria-hidden="true"></div></div>
+          <form id="plan-form"><div class="form-heading"><label for="prompt">บอกแผนของคุณ</label><span>01 / วางแผน</span></div><div class="composer"><textarea id="prompt" maxlength="2000" rows="3" placeholder="เช่น พรุ่งนี้บ่าย 2 ประชุม 1 ชั่วโมง เตือนก่อน 15 นาที"></textarea><div class="composer-actions"><button id="voice-button" class="tool-button voice-button" type="button"><span aria-hidden="true">◉</span> พูดแทนพิมพ์</button><label class="tool-button image-upload" for="image-input"><span aria-hidden="true">▧</span> แนบภาพ</label><input id="image-input" type="file" accept="image/jpeg,image/png,image/webp"><span class="composer-hint">JPG, PNG, WebP · ไม่เกิน 20 MB (ย่ออัตโนมัติ)</span></div></div><p id="voice-status" class="input-status" aria-live="polite"></p><p id="image-status" class="input-status" aria-live="polite"></p>
+          <div class="form-bottom"><span>ข้อความและภาพที่แนบจะส่งไปยัง Gemini</span><button id="plan-button" class="primary" type="submit">ให้ AI วางแผน <span aria-hidden="true">↗</span></button></div></form>
+          <div class="examples-wrap"><div class="sample-label">ลองเริ่มจากตัวอย่าง <span>↘</span></div><div class="examples"><button data-prompt="พรุ่งนี้ 10 โมง ประชุมทีม 1 ชั่วโมง แจ้งเตือนก่อน 30 นาที" type="button">ประชุมทีมพรุ่งนี้ 10 โมง <span>↗</span></button><button data-prompt="วันเสาร์นี้ 14:00 อ่านหนังสือ 2 ชั่วโมง แจ้งเตือนก่อน 15 นาที" type="button">วางแผนอ่านหนังสือ <span>↗</span></button></div></div>
+          <div id="plan-result" class="plan-result" aria-live="polite"></div>
+        </div><div class="assistant-footer"><span aria-hidden="true">◷</span><span>ขณะนี้ยังไม่มีการแจ้งเตือน ระบบจะแจ้งเตือนหลังตั้งค่าบริการเพิ่มเติม</span></div>
+      </section>
+    </div><div class="backup"><div><strong>เก็บแผนของคุณไว้อย่างปลอดภัย</strong><p>ดาวน์โหลดไฟล์สำรองหรือเพิ่มข้อมูลจากไฟล์ที่เคยบันทึก</p></div><div class="backup-actions"><button id="export-backup" type="button">↓ สำรองข้อมูล</button><label for="import-backup">↑ นำเข้าข้อมูล</label><input id="import-backup" type="file" accept="application/json,.json"></div><p id="backup-status" role="status"></p></div><footer class="foot"><span>MADE FOR BETTER DAYS <span class="foot-sparkle">✳</span></span><span>เขตเวลา: <span id="timezone">—</span></span></footer>
+  </main>
+</div>
+<template id="event-template"><article class="draft-event"><div class="draft-top"><strong>✦ รายละเอียดกิจกรรม</strong><span>ตรวจสอบก่อนบันทึก</span></div><label>ชื่อกิจกรรม<input class="draft-title" maxlength="140" required></label><div class="draft-times"><label>เริ่ม<input class="draft-start" type="datetime-local" required></label><label>สิ้นสุด<input class="draft-end" type="datetime-local" required></label></div><label>รายละเอียด<textarea class="draft-description" rows="2" maxlength="1500"></textarea></label><label>แจ้งเตือนล่วงหน้า (ยังไม่เปิดใช้งาน)<select class="draft-reminder"><option value="0">เมื่อถึงเวลา</option><option value="5">5 นาที</option><option value="10">10 นาที</option><option value="15">15 นาที</option><option value="30">30 นาที</option><option value="60">1 ชั่วโมง</option><option value="1440">1 วัน</option></select></label></article></template>
+</body></html>
