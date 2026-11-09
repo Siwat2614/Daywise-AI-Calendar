@@ -4,6 +4,10 @@ Daywise is an AI-assisted calendar for turning written requests, voice input, an
 
 **Live demo:** https://daywise-calendar.vercel.app/
 
+## Project contribution
+
+Project work included defining requirements and feature priorities, reviewing the user experience, and testing synchronization across a computer and phone. Implementation and documentation were developed with AI-assisted tools and reviewed through automated and manual checks.
+
 ## Features
 
 - Draft events from Thai or English text and images with Gemini; review, edit, or remove suggested events before saving.
@@ -12,6 +16,13 @@ Daywise is an AI-assisted calendar for turning written requests, voice input, an
 - Warn about overlapping events and support tables containing up to 50 events per request.
 - Sign in with email and password and synchronize events via Supabase. Local events can be imported explicitly into an account.
 - Export and import a JSON backup.
+
+## Verification
+
+- Automated tests cover date validation, AI response handling, image preparation, overlap detection, backup validation and account-check behavior. Run `npm test` for current results.
+- Browser testing covered creating, editing and deleting events, JSON backup and import, and calendar views using test data.
+- Gemini was tested with a sample image containing 24 scheduled events; cross-device synchronization was checked with a real account.
+- These checks do not guarantee AI extraction accuracy, delivery of future notifications, or production security under all conditions.
 
 ## Current limitations
 
